@@ -75,3 +75,35 @@ WHERE TABLE_NAME='<table-name>';
 # While testing you can drop table to start anew as follows:
 
 DROP TABLE <table-name>;
+
+# What if scraping is blocked -> We need user agent
+
+useragentstring.com
+
+# Copy the user agent by inspecting from devtools into the website above to learn about all the details of a user agent for that site
+
+# For some sites if we change the user agent each time we make a request website will think that it's a different user each time we make a request and so it will allow, however for more complex websites they will look at everything in the request header and all of it will need to be (slightly) different
+
+# So how can we change user agents, ip addresses, and request headers?
+
+# Disabling mysql pipeline for learning bypassing
+
+# You can add user agents in the spider file as follows:
+
+user_agent_list = [*populate list*]
+
+# This can then be used as shown in the following example, add the user agent change line in every line which is making a response.follow:
+
+yield response.follow(book_page_url, callback=self.parse_book_page, headers="User-Agent": user_agent_list[random.randint(0, len(user_agent_list))])
+
+# You need A LOT of user agents, for this we can use the fake user agent api
+
+# So to do that we can implement a middleware
+
+# Scroll to the bottom of the middleware.py file to refer to how it is done using scrapeops.io
+
+# Once you are done implementing the scrapeops middleware, add it in 'settings.py' in DOWNLOADER_MIDDLEWARE
+
+# You no longer need to send the fake headers from the spider, since the middleware has been implemented now
+
+# Sometimes for complex sites you have to set the ROBOTSTXT_OBEY to False in the settings.py

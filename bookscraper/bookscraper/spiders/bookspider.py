@@ -1,5 +1,6 @@
 import scrapy
 from bookscraper.items import BookItem
+import random
 
 
 class BookspiderSpider(scrapy.Spider):
@@ -10,11 +11,13 @@ class BookspiderSpider(scrapy.Spider):
     custom_settings = {
         'FEEDS': {
             'booksdata.csv': {
-                    'format': 'json',
+                    'format': 'csv',
                     'overwrite': True
                 }
         }
     }
+
+    user_agent_list = ['Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36']
 
     def parse(self, response):
         books = response.css('article.product_pod')

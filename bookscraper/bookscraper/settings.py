@@ -15,9 +15,18 @@ NEWSPIDER_MODULE = "bookscraper.spiders"
 FEEDS = {
     'booksdata.json': {
         'format': 'json',
-        'exporter': 'bookscraper.custom_json_exporters.book_exporter.PrettyJsonItemExporter'
-    }
+    },
 }
+
+SCRAPEOPS_API_KEY = '721a2781-0579-41ea-88fe-bf24e4a074b8'
+SCRAPEOPS_FAKE_USER_AGENT_ENDPOINT = 'https://headers.scrapeops.io/v1/user-agents'
+SCRAPEOPS_FAKE_USER_AGENTS_ENABLED = True
+SCRAPEOPS_NUM_RESULTS = 50
+
+SCRAPEOPS_API_KEY = '721a2781-0579-41ea-88fe-bf24e4a074b8'
+SCRAPEOPS_FAKE_HEADER_ENDPOINT = 'https://headers.scrapeops.io/v1/browser-headers'
+SCRAPEOPS_FAKE_HEADER_ENABLED = True
+SCRAPEOPS_NUM_RESULTS = 50
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -57,9 +66,11 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
+DOWNLOADER_MIDDLEWARES = {
 #    "bookscraper.middlewares.BookscraperDownloaderMiddleware": 543,
-#}
+    # "bookscraper.middlewares.ScrapeOpsFakeUserAgentMiddleware": 400,
+    "bookscraper.middlewares.ScrapeOpsFakeHeaderMiddleware": 400,
+}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
@@ -72,7 +83,7 @@ ROBOTSTXT_OBEY = True
 # The number tells order of execution
 ITEM_PIPELINES = {
    'bookscraper.pipelines.BookscraperPipeline': 300,
-   'bookscraper.pipelines.SaveToMySQLPipeline': 400
+#    'bookscraper.pipelines.SaveToMySQLPipeline': 400,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
