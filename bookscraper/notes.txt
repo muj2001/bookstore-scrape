@@ -1,0 +1,60 @@
+# create venv, and pip install Scrapy
+# to create new project
+
+scrapy startproject <project-name>
+
+# to create new spider
+
+scrapy genspider <spider-name> <url-to-scrape>
+
+# use scrapy shell to find the selectors you want
+
+- pip install ipython
+- add in 'scrapy.cfg' file under settings:
+    shell = ipython
+- run 'scrapy shell' in console
+- once you have run the command, you can navigate through the website using your spider manually
+- use 'fetch('website-url')' to get a response from a website
+- you can figure out what you want through this and then code the spider
+
+# to run a spider 'scrapy crawl <spider-name>' in the project directory in the console, not in the scrapy shell
+
+# if you would like to output data in a csv, you can use other extensions or file types as well
+scrapy crawl <spider-name> -O <file-name>.csv
+
+To append data into a file instead of overwriting you can use '-o' instead of '-O'
+
+Items helps us define what we want in a block of data we are scraping
+
+Pipelines are used to process data before storing them in the output
+
+# You can automate the output file format and output format as well, for which you will have to add something like this in the 'settings.py' file
+
+FEEDS = {
+    'booksdata.json': {
+        'format': 'json',
+    }
+}
+
+# You can specify custom FEED settings within the spider as well as follows:
+
+# Within for example bookspider.py within the class:
+
+custom_settings = {
+        'FEEDS': {
+            'booksdata2.csv': {'format': 'json'}
+        }
+    }
+
+# You can set overwrite to True or False as well as follows:
+
+custom_settings = {
+        'FEEDS': {
+            'booksdata2.csv': {'format': 'json',
+            'overwrite': True
+            }
+        }
+    }
+
+# The above can be done within custom_settings and as well as the global settings.py
+
