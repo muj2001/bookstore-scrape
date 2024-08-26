@@ -58,3 +58,20 @@ custom_settings = {
 
 # The above can be done within custom_settings and as well as the global settings.py
 
+# Installing Python 3 and MySQL development headers and libraries:
+
+sudo apt-get install python3-dev default-libmysqlclient-dev build-essential pkg-config
+
+# You can refer to DB connection and adding items in the DB in the pipelines.py file
+
+# You will have to add the pipeline which is adding data to DB into the settings.py as well
+
+# You can use the following command to view Table columns in mysql
+
+SELECT COLUMN_NAME
+FROM INFORMATION_SCHEMA.columns
+WHERE TABLE_NAME='<table-name>';
+
+# While testing you can drop table to start anew as follows:
+
+DROP TABLE <table-name>;
